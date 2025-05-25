@@ -6,7 +6,7 @@ RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Етап 2: Мінімальний образ
-FROM scratch
+FROM gcr.io/distroless/static:nonroot
 COPY --from=builder /app/main /main
 EXPOSE 8080
 CMD ["/main"]
